@@ -27,7 +27,7 @@ if ! dpkg -s asdf; then
   echo '. $HOME/.asdf/asdf.sh' >> ~/.bashrc
   echo '. $HOME/.asdf/completions/asdf.bash' >> ~/.bashrc
   # Restart bash
-  . .bashrc
+  . ~/.bashrc
 
   asdf plugin-add ruby
   asdf plugin-add nodejs
