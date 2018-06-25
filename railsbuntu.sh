@@ -4,7 +4,7 @@ print_step() {
   local fmt="$1"; shift
 
   # shellcheck disable=SC2059
-  printf "\n$fmt\n" "$@"
+  printf "\n------------$fmt-------------\n" "$@"
 }
 
 sudo apt-get update
@@ -24,8 +24,8 @@ fi
 print_step "Checking Asdf version manager"
 if ! dpkg -s asdf; then
   git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.5.0
-  echo -e '\n. $HOME/.asdf/asdf.sh' >> ~/.bashrc
-  echo -e '\n. $HOME/.asdf/completions/asdf.bash' >> ~/.bashrc
+  echo '\n. $HOME/.asdf/asdf.sh' >> ~/.bashrc
+  echo '\n. $HOME/.asdf/completions/asdf.bash' >> ~/.bashrc
 
   source ~/.bashrc
 
@@ -62,7 +62,7 @@ print_step "Checking for Yarn"
 if ! yarn --v; then
   curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
   echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-  sudo apt-get update && sudo apt-get install yarn
+  sudo apt-get update && sudo apt-get install -y yarn
 else
   echo 'OK'
 fi
@@ -106,7 +106,7 @@ fi
 
 print_step "Elasticsearch"
 if ! systemctl is-active elasticsearch.service; then
-  sudo apt-get install default-jre
+  sudo apt-get install -y default-jre
   wget https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/deb/elasticsearch/2.3.1/elasticsearch-2.3.1.deb
   echo "Instalating Elasticsearch"
   sudo dpkg -i elasticsearch-2.3.1.deb
