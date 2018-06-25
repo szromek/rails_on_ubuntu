@@ -20,7 +20,7 @@ fi
 # Install Asdf ###############################################################
 
 print_step "Checking Asdf version manager"
-if ! dpkg -s asdf; then
+if ! asdf --version; then
   git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.5.0
   echo '. $HOME/.asdf/asdf.sh' >> ~/.bashrc
   echo '. $HOME/.asdf/completions/asdf.bash' >> ~/.bashrc
