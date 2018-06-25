@@ -24,8 +24,8 @@ fi
 print_step "Checking Asdf version manager"
 if ! dpkg -s asdf; then
   git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.5.0
-  echo '\n. $HOME/.asdf/asdf.sh' >> ~/.bashrc
-  echo '\n. $HOME/.asdf/completions/asdf.bash' >> ~/.bashrc
+  echo '$HOME/.asdf/asdf.sh' >> ~/.bashrc
+  echo '$HOME/.asdf/completions/asdf.bash' >> ~/.bashrc
 
   source ~/.bashrc
 
