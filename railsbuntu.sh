@@ -62,10 +62,12 @@ fi
 
 print_step "Checking for Ruby"
 if ! ruby -v; then
-  asdf install ruby 2.5.1
-  asdf global ruby 2.5.1
+  sudo apt-get install -y curl
+  sudo apt-get install -y libssl1.0-dev
   # Capybara dependencies
   sudo apt-get install -y qt5-default libqt5webkit5-dev gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-x
+  asdf install ruby 2.5.1
+  asdf global ruby 2.5.1
 fi
 
 
