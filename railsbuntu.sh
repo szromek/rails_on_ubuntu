@@ -92,10 +92,15 @@ fi
 
 print_step "Elasticsearch"
 if ! systemctl is-active elasticsearch.service; then
-  sudo apt-get install -y default-jre
-  wget https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/deb/elasticsearch/2.3.1/elasticsearch-2.3.1.deb
-  sudo dpkg -i elasticsearch-2.3.1.deb
-  sudo systemctl enable elasticsearch.service
+  # Remove Java 10 (non supported)
+  sudo apt-get purge -y openjdk-\* icedtea-\* icedtea6-\*
+
+  sudo apt install -y openjdk-8-jre apt-transport-https wget nginx
+  wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
+  sudo echo "deb https://artifacts.elastic.co/packages/6.x/apt stable main" > /etc/apt/sources.list.d/elastic.list
+  sudo apt update
+  sudo apt install elasticsearch
+  sudo systemctl start elasticsearch
 fi
 
 
